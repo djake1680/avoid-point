@@ -1,0 +1,12 @@
+@import '../../../style/main';
+
+.aboutContainer {
+  @extend .centerContent;
+
+  p {
+    text-align: center;
+    width: 600px;
+    font-size: 1.25em;
+  }
+}
+

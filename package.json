@@ -1,0 +1,83 @@
+{
+  "name": "avoid-point",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test:jest": "BABEL_ENV=node jest",
+    "test:mocha": "BABEL_ENV=node mocha",
+    "build:client": "BABEL_ENV=browser webpack --config ./webpack/webpack.dev-client.config.js --display-error-details",
+    "build:server": "BABEL_ENV=browser webpack --config ./webpack/webpack.dev-server.config.js --display-error-details",
+    "start": "npm run build:client && npm run build:server && node ./build/server/server.js",
+    "dev": "BABEL_ENV=browser webpack-dev-server --config ./webpack/webpack.dev-client.config.js --inline --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trevorlinan/avoid-point.git"
+  },
+  "author": "Trevor Linan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trevorlinan/avoid-point/issues"
+  },
+  "homepage": "https://github.com/trevorlinan/avoid-point#readme",
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(scss)$": "<rootDir>/node_modules/jest-css-modules"
+    }
+  },
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "body-parser": "^1.17.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
+    "redux": "^3.6.0",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0",
+    "underscore": "^1.8.3",
+    "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-jest": "^19.0.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.2.2",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.24.0",
+    "chai": "^3.5.0",
+    "css-loader": "^0.27.3",
+    "enzyme": "^2.7.1",
+    "expect": "^1.20.2",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "ignore-styles": "^5.0.1",
+    "jest": "^19.0.2",
+    "jest-cli": "^19.0.2",
+    "jest-css-modules": "^1.1.0",
+    "mocha": "^3.2.0",
+    "node-sass": "^4.5.0",
+    "postcss-loader": "^1.3.3",
+    "react-addons-test-utils": "^15.4.2",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "regenerator-runtime": "^0.10.3",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.14.1",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-node-externals": "^1.5.4"
+  }
+}

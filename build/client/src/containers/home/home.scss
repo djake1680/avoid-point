@@ -1,0 +1,20 @@
+@import '../../../style/main';
+
+.homeContainer {
+  @extend .centerContent;
+  flex-grow: 1;
+  flex-flow: column nowrap;
+
+  .homeTitleContainer {
+    @extend .centerContent;
+    margin-top: 100px;
+    width: 175px;
+    height: 175px;
+    border: 5px solid #000;
+
+    .homeTitle {
+      font-size: 3em;
+    }
+
+  }
+}
