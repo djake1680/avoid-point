@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './event_hub.scss';
-import axios from 'axios';
+import agent007 from 'superagent';
 
 const APP_KEY = 'wDjnnQNtWmFvJRXs'; // Eventful API key
 
@@ -47,14 +47,21 @@ export default class EventHub extends Component {
     }
 
     findEvents = () => {
-        return axios.get(
-            `http://api.eventful.com/json/events/search?app_key=${APP_KEY}&where=${this.state.searchText}&when=today&within=25`
-        ).then(eventInfo => {
-            let events = eventInfo.data.events.event.map(event => {
-                let { id, title, longitude, latitude, venue_name, venue_address, city_name, region_abbr, postal_code } = event;
-                return { id, title, longitude, latitude, venue_name, venue_address, city_name, region_abbr, postal_code };
-            });
-            this.setState({ events, googleMapSearchValue: this.state.searchText });
+        return agent007
+            .get('http://api.eventful.com/json/events/search?')
+            .query({
+                app_key: APP_KEY,
+                where: this.state.searchText,
+                when: 'today',
+                within: '25'
+            })
+            .end((err, res) => {
+                let eventInfo = JSON.parse(res.xhr.response);
+                let events = eventInfo.events.event.map(event => {
+                    let { id, title, longitude, latitude, venue_name, venue_address, city_name, region_abbr, postal_code } = event;
+                    return { id, title, longitude, latitude, venue_name, venue_address, city_name, region_abbr, postal_code };
+                });
+                this.setState({ events, googleMapSearchValue: this.state.searchText });
         });
     }
 

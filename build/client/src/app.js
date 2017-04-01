@@ -5,7 +5,6 @@ import { StaticRouter } from 'react-router';
 import Template from './views/template';
 
 // Components
-import GoogleMap from './containers/map/google_map';
 import EventHub from './containers/event_hub/event_hub';
 
 let initialProps = {title: 'Avoid Point'};
