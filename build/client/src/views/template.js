@@ -10,7 +10,8 @@ export default (props) => (
 		</head>
 		<body>		
 			{props.children}
-			<script src="/bundle.js" />
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZOKztpgiiRqzd59Er73RV_m7JQOU8ZOw" />
+            <script src="/bundle.js" />
 		</body>
 	</html>
 )

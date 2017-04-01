@@ -3,9 +3,12 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { StaticRouter } from 'react-router';
 
 import Template from './views/template';
-import Home from './containers/home/home';
 
-let initialProps = {title: 'React in a Box'};
+// Components
+import GoogleMap from './containers/map/google_map';
+import EventHub from './containers/event_hub/event_hub';
+
+let initialProps = {title: 'Avoid Point'};
 !!module.hot ? console.log('Module Hot!!') : console.log('No hot module bro.');
 
 export default class App extends Component {
@@ -40,9 +43,8 @@ export default class App extends Component {
         </BrowserRouter>
     );
 
-	Route = () => ( <Route path='/' component={() => <Home {...initialProps} /> } /> );
+    // All routes go here
+	Route = () => ( <Route path='/' component={() => <EventHub {...initialProps} /> } /> );
 
-	render = () => {
-		return !!module.hot ? this.activateDev() : this.activateApp();
-	}
+	render = () => !!module.hot ? this.activateDev() : this.activateApp();
 }

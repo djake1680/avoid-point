@@ -64,7 +64,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/assets/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -80,12 +80,103 @@ module.exports = require("react");
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__google_map_scss__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__google_map_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__google_map_scss__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var GoogleMap = function (_Component) {
+    _inherits(GoogleMap, _Component);
+
+    function GoogleMap(props) {
+        _classCallCheck(this, GoogleMap);
+
+        var _this = _possibleConstructorReturn(this, (GoogleMap.__proto__ || Object.getPrototypeOf(GoogleMap)).call(this, props));
+
+        _this.componentDidMount = function () {
+            _this.initMap({ lat: 32.708806836774, lng: -117.15423137672121 });
+        };
+
+        _this.shouldComponentUpdate = function (nextProps, nextState) {
+            return nextProps.searchValue !== _this.props.searchValue;
+        };
+
+        _this.componentWillUpdate = function (nextProps, nextState) {
+            _this.initMap({ lat: Number(nextProps.events[0].latitude), lng: Number(nextProps.events[0].longitude) });
+            _this.createMarkers(nextProps.events);
+        };
+
+        _this.initMap = function (coords) {
+            _this.googleMap = new google.maps.Map(_this.mapCanvas, {
+                zoom: 12,
+                center: coords
+            });
+        };
+
+        _this.createMarkers = function (events) {
+            return events.map(function (event) {
+                console.log('Event: ', event);
+                var coords = { lat: Number(event.latitude), lng: Number(event.longitude) };
+                var marker = new google.maps.Marker({
+                    position: coords,
+                    map: _this.googleMap
+                });
+            });
+        };
+
+        _this.render = function () {
+            console.log('Render GoogleMap');
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: __WEBPACK_IMPORTED_MODULE_1__google_map_scss___default.a.map_container },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: __WEBPACK_IMPORTED_MODULE_1__google_map_scss___default.a.google_map, ref: function ref(_ref) {
+                        return _this.mapCanvas = _ref;
+                    } })
+            );
+        };
+
+        return _this;
+    }
+
+    return GoogleMap;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+var _default = GoogleMap;
+/* harmony default export */ __webpack_exports__["a"] = (_default);
+;
+
+var _temp = function () {
+    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+        return;
+    }
+
+    __REACT_HOT_LOADER__.register(GoogleMap, 'GoogleMap', '/Users/Trevor/Code/projects/avoid-point/build/client/src/containers/map/google_map.js');
+
+    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/projects/avoid-point/build/client/src/containers/map/google_map.js');
+}();
+
+;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_template__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__containers_home_home__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_template__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__containers_map_google_map__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__containers_event_hub_event_hub__ = __webpack_require__(8);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -98,8 +189,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+// Components
 
-var initialProps = { title: 'React in a Box' };
+
+
+var initialProps = { title: 'Avoid Point' };
  false ? console.log('Module Hot!!') : console.log('No hot module bro.');
 
 var App = function (_Component) {
@@ -140,7 +234,7 @@ var App = function (_Component) {
 
         _this.Route = function () {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["Route"], { path: '/', component: function component() {
-                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__containers_home_home__["a" /* default */], initialProps);
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__containers_event_hub_event_hub__["a" /* default */], initialProps);
                 } });
         };
 
@@ -160,6 +254,9 @@ var App = function (_Component) {
     // Only need BrowserRouter for development (client side only)
 
 
+    // All routes go here
+
+
     return App;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
@@ -172,27 +269,27 @@ var _temp = function () {
         return;
     }
 
-    __REACT_HOT_LOADER__.register(App, 'App', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/app.js');
+    __REACT_HOT_LOADER__.register(App, 'App', '/Users/Trevor/Code/projects/avoid-point/build/client/src/app.js');
 
-    __REACT_HOT_LOADER__.register(initialProps, 'initialProps', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/app.js');
+    __REACT_HOT_LOADER__.register(initialProps, 'initialProps', '/Users/Trevor/Code/projects/avoid-point/build/client/src/app.js');
 
-    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/app.js');
+    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/projects/avoid-point/build/client/src/app.js');
 }();
 
 ;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_redux__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_promise__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_promise__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_redux_thunk__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_redux_thunk__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_redux_thunk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_redux_thunk__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reducers_reducer_main__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reducers_reducer_main__ = __webpack_require__(9);
 
 
 
@@ -219,27 +316,27 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(middleware, 'middleware', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/createStore.js');
+  __REACT_HOT_LOADER__.register(middleware, 'middleware', '/Users/Trevor/Code/projects/avoid-point/build/client/src/createStore.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/createStore.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/projects/avoid-point/build/client/src/createStore.js');
 }();
 
 ;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-redux");
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -252,44 +349,7 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(MAIN, "MAIN", "/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/actions/types.js");
-}();
-
-;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_scss__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__about_scss__);
-
-
-
-var _default = function _default() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: __WEBPACK_IMPORTED_MODULE_1__about_scss___default.a.aboutContainer },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'p',
-			null,
-			'Hi! I\'m React in a Box, an isomporhic React boilerplate utilizing a Node/Express server, Redux, React Router v4 and Webpack.'
-		)
-	);
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (_default);
-;
-
-var _temp = function () {
-	if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-		return;
-	}
-
-	__REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/components/about/about.js');
+  __REACT_HOT_LOADER__.register(MAIN, "MAIN", "/Users/Trevor/Code/projects/avoid-point/build/client/src/actions/types.js");
 }();
 
 ;
@@ -301,9 +361,61 @@ var _temp = function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_scss__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__home_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_about_about__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_item_scss__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_item_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__event_item_scss__);
+
+
+
+var _default = function _default(props) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: __WEBPACK_IMPORTED_MODULE_1__event_item_scss___default.a.event_item_container },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h1',
+            { className: __WEBPACK_IMPORTED_MODULE_1__event_item_scss___default.a.title },
+            props.title
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h3',
+            { className: __WEBPACK_IMPORTED_MODULE_1__event_item_scss___default.a.venue },
+            props.venue
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'address',
+            { className: __WEBPACK_IMPORTED_MODULE_1__event_item_scss___default.a.address },
+            props.address
+        )
+    );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (_default);
+;
+
+var _temp = function () {
+    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+        return;
+    }
+
+    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/projects/avoid-point/build/client/src/components/event_item/event_item.js');
+}();
+
+;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_hub_scss__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_hub_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__event_hub_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__map_google_map__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_event_item_event_item__ = __webpack_require__(7);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -314,64 +426,114 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+var APP_KEY = 'wDjnnQNtWmFvJRXs';
 
-var Home = function (_Component) {
-    _inherits(Home, _Component);
+// Components
 
-    function Home() {
-        var _ref;
 
-        var _temp, _this, _ret;
 
-        _classCallCheck(this, Home);
+var EventHub = function (_Component) {
+    _inherits(EventHub, _Component);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+    function EventHub(props) {
+        var _this2 = this;
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Home.__proto__ || Object.getPrototypeOf(Home)).call.apply(_ref, [this].concat(args))), _this), _this.render = function () {
+        _classCallCheck(this, EventHub);
+
+        var _this = _possibleConstructorReturn(this, (EventHub.__proto__ || Object.getPrototypeOf(EventHub)).call(this, props));
+
+        _this.SearchComponent = function () {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { className: __WEBPACK_IMPORTED_MODULE_1__home_scss___default.a.homeContainer },
+                { className: __WEBPACK_IMPORTED_MODULE_1__event_hub_scss___default.a.search_container },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+                    className: __WEBPACK_IMPORTED_MODULE_1__event_hub_scss___default.a.search_input,
+                    type: 'text', placeholder: 'Search',
+                    value: _this.state.searchText,
+                    onChange: function onChange(text) {
+                        return _this.setState({ searchText: text.target.value });
+                    } }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'button',
+                    { onClick: _this.findEvents },
+                    'Go'
+                )
+            );
+        };
+
+        _this.findEvents = function () {
+            return __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('http://api.eventful.com/json/events/search?app_key=' + APP_KEY + '&where=' + _this.state.searchText + '&when=today&within=10').then(function (eventInfo) {
+                var events = eventInfo.data.events.event;
+                _this.setState({ events: events, googleMapSearchValue: _this.state.searchText });
+            });
+        };
+
+        _this.eventList = function () {
+            return _this.state.events.map(function (event) {
+                console.log('Event: ', event.title);
+                var eventInfo = {
+                    title: event.title,
+                    venue: event.venue_name,
+                    address: event.venue_address + ', ' + event.city_name + ', ' + event.region_abbr + ' ' + event.postal_code
+                };
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_event_item_event_item__["a" /* default */], _extends({ key: event.id }, eventInfo));
+            });
+        };
+
+        _this.render = function () {
+            console.log('Render EventHub');
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__map_google_map__["a" /* default */], { searchValue: _this.state.googleMapSearchValue, events: _this.state.events }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: __WEBPACK_IMPORTED_MODULE_1__home_scss___default.a.homeTitleContainer },
+                    { className: __WEBPACK_IMPORTED_MODULE_1__event_hub_scss___default.a.event_hub_container },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(_this2.SearchComponent, null),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'h1',
-                        { className: __WEBPACK_IMPORTED_MODULE_1__home_scss___default.a.homeTitle },
-                        'React'
+                        'div',
+                        { className: __WEBPACK_IMPORTED_MODULE_1__event_hub_scss___default.a.event_list_container },
+                        _this.eventList()
                     )
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_about_about__["a" /* default */], null)
+                )
             );
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.state = {
+            searchText: '',
+            googleMapSearchValue: '',
+            events: []
+        };
+        return _this;
     }
 
-    return Home;
+    return EventHub;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-var _default = Home;
+var _default = EventHub;
 /* harmony default export */ __webpack_exports__["a"] = (_default);
 ;
 
-var _temp2 = function () {
+var _temp = function () {
     if (typeof __REACT_HOT_LOADER__ === 'undefined') {
         return;
     }
 
-    __REACT_HOT_LOADER__.register(Home, 'Home', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/containers/home/home.js');
+    __REACT_HOT_LOADER__.register(EventHub, 'EventHub', '/Users/Trevor/Code/projects/avoid-point/build/client/src/containers/event_hub/event_hub.js');
 
-    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/containers/home/home.js');
+    __REACT_HOT_LOADER__.register(APP_KEY, 'APP_KEY', '/Users/Trevor/Code/projects/avoid-point/build/client/src/containers/event_hub/event_hub.js');
+
+    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/projects/avoid-point/build/client/src/containers/event_hub/event_hub.js');
 }();
 
 ;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions_types__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions_types__ = __webpack_require__(6);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -399,13 +561,13 @@ var _temp = function () {
         return;
     }
 
-    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/reducers/reducer_main.js');
+    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Trevor/Code/projects/avoid-point/build/client/src/reducers/reducer_main.js');
 }();
 
 ;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -433,6 +595,7 @@ var _default = function _default(props) {
 			"body",
 			null,
 			props.children,
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("script", { src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCZOKztpgiiRqzd59Er73RV_m7JQOU8ZOw" }),
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("script", { src: "/bundle.js" })
 		)
 	);
@@ -446,25 +609,25 @@ var _temp = function () {
 		return;
 	}
 
-	__REACT_HOT_LOADER__.register(_default, "default", "/Users/Trevor/Code/Boilerplates/react-in-a-box/build/client/src/views/template.js");
+	__REACT_HOT_LOADER__.register(_default, "default", "/Users/Trevor/Code/projects/avoid-point/build/client/src/views/template.js");
 }();
 
 ;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_server__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_server__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom_server__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_redux__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__client_src_app__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__client_src_createStore__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__client_src_app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__client_src_createStore__ = __webpack_require__(3);
 /* harmony export (immutable) */ __webpack_exports__["default"] = render;
 
 
@@ -501,59 +664,77 @@ var _temp = function () {
 		return;
 	}
 
-	__REACT_HOT_LOADER__.register(render, 'render', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/server/index.js');
+	__REACT_HOT_LOADER__.register(render, 'render', '/Users/Trevor/Code/projects/avoid-point/build/server/index.js');
 
-	__REACT_HOT_LOADER__.register(store, 'store', '/Users/Trevor/Code/Boilerplates/react-in-a-box/build/server/index.js');
+	__REACT_HOT_LOADER__.register(store, 'store', '/Users/Trevor/Code/projects/avoid-point/build/server/index.js');
 }();
 
 ;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-module.exports = {
-	"centerContent": "about__centerContent___1KhBx",
-	"aboutContainer": "about__aboutContainer___PFnf8"
-};
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
 module.exports = {
-	"centerContent": "home__centerContent___1DCSf",
-	"homeContainer": "home__homeContainer___1LgJK",
-	"homeTitleContainer": "home__homeTitleContainer___19NF7",
-	"homeTitle": "home__homeTitle___KoTnN"
+	"event_item_container": "event_item__event_item_container___1_rNq",
+	"title": "event_item__title___3psL6",
+	"venue": "event_item__venue___2it5i",
+	"address": "event_item__address___2phw9"
 };
 
 /***/ }),
 /* 13 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-router");
+module.exports = {
+	"center_content": "event_hub__center_content___Z2cVs",
+	"event_hub_container": "event_hub__event_hub_container___15j0T",
+	"search_container": "event_hub__search_container___3GqEN",
+	"search_input": "event_hub__search_input___1QMsy",
+	"event_list_container": "event_hub__event_list_container___3JU0a"
+};
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-router-dom");
+module.exports = {
+	"map_container": "google_map__map_container___pTsAR",
+	"google_map": "google_map__google_map___2D7M2"
+};
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports) {
 
-module.exports = require("redux");
+module.exports = require("axios");
 
 /***/ }),
 /* 16 */
 /***/ (function(module, exports) {
 
-module.exports = require("redux-promise");
+module.exports = require("react-router");
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom");
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-promise");
+
+/***/ }),
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");

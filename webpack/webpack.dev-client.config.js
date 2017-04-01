@@ -44,7 +44,8 @@ module.exports = {
                 ],
                 include: path.join(__dirname, '..', 'build', 'client', 'src'),
                 exclude: path.join(__dirname, '..', 'node_modules')
-            }
+            },
+            { test: /\.png$/, loader: "url-loader?limit=100000" }
         ]
     },
     plugins: [

@@ -16,13 +16,16 @@ module.exports = {
 	target: 'node',
 	externals: nodeExternals(),  
 	module: {
-		loaders: commonLoaders.concat([{
-			test: /\.scss$/,
-			loaders: [
-				'css-loader/locals?modules&localIdentName=[name]__[local]___[hash:base64:5]',
-				'sass-loader'
-			]
-		}])
+		loaders: commonLoaders.concat([
+		    {
+                test: /\.scss$/,
+                loaders: [
+                    'css-loader/locals?modules&localIdentName=[name]__[local]___[hash:base64:5]',
+                    'sass-loader'
+                ]
+		    },
+            { test: /\.png$/, loader: "url-loader?limit=100000" }
+		    ])
 	}
 };
 
