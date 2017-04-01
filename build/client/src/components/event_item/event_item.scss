@@ -1,0 +1,27 @@
+.event_item_container {
+  width: 350px;
+  height: 90px;
+  background-color: #EFEFEF;
+  border-radius: 25px;
+  margin: 5px 0 5px 15px;
+  padding: 10px;
+  line-height: 12px;
+
+
+  .title {
+    font-size: 1.15em;
+    font-weight: 300;
+    color: #000;
+  }
+
+  .venue {
+    font-size: .9em;
+    color: #000;
+  }
+
+  .address {
+    font-size: .9em;
+    color: #000;
+  }
+
+}
