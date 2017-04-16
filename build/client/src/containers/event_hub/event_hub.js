@@ -18,26 +18,37 @@ export default class EventHub extends Component {
         this.state = {
             searchText: '',
             googleMapSearchValue: '',
-            events: []
+            events: [],
+            filterOptions: {
+                radius: '',
+                category: ''
+
+            }
         }
     }
 
-    SearchComponent = () => {
-        return (
-            <div className={styles.search_container}>
-                <input
-                    className={styles.search_input}
-                    type="text"
-                    placeholder='City or ZIP Code'
-                    value={this.state.searchText}
-                    onChange={text => this.setState({ searchText: text.target.value })} />
-                <button onClick={this.findEvents}>
-                    Go
-                </button>
-                <p onClick={this.getUserLocation}>Use My Location</p>
-            </div>
-        )
-    }
+    SearchComponent = () => (
+        <div className={styles.search_container}>
+            <input
+                className={styles.search_input}
+                type="text"
+                placeholder='City or ZIP Code'
+                value={this.state.searchText}
+                onChange={event => this.setState({ searchText: event.target.value })}
+            />
+            <button onClick={this.findEvents}>Go</button>
+            <p onClick={this.getUserLocation}>Use My Location</p>
+        </div>
+    )
+
+    filterOptions = () => (
+        <div>
+            //radius
+            //date
+            //category
+        </div>
+    )
+
 
     getUserLocation = () => {
         this.setState({ searchText: 'Locating...' });
@@ -56,20 +67,17 @@ export default class EventHub extends Component {
                 within: '25'
             })
             .end((err, res) => {
+                if (!!err) return;
                 let eventInfo = JSON.parse(res.xhr.response);
                 let events = eventInfo.events.event.map(event => {
                     let { id, title, longitude, latitude, venue_name, venue_address, city_name, region_abbr, postal_code } = event;
                     return { id, title, longitude, latitude, venue_name, venue_address, city_name, region_abbr, postal_code };
                 });
                 this.setState({ events, googleMapSearchValue: this.state.searchText });
-        });
+            });
     }
 
-    eventList = () => {
-        return this.state.events.map(event => {
-            return <EventItem key={event.id} {...event} />
-        })
-    }
+    eventList = () => this.state.events.map(event => <EventItem key={event.id} {...event} /> );
 
     render = () => {
         console.log('Render EventHub');
@@ -86,3 +94,4 @@ export default class EventHub extends Component {
         )
     }
 }
+

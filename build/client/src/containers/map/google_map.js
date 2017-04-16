@@ -46,3 +46,9 @@ export default class GoogleMap extends Component {
         )
     }
 }
+
+GoogleMap.propTypes = {
+    searchValue: React.PropTypes.string,
+    events: React.PropTypes.array
+}
+
